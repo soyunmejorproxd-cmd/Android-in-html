@@ -1,0 +1,150 @@
+{
+  "tool": "HAR Extractor Studio",
+  "version": "1.0",
+  "source": "C:\\Users\\USUARIO\\Downloads\\3724861607956707585.playables.usercontent.goog.har",
+  "entries": [
+    {
+      "index": 0,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/index.html",
+      "method": "GET",
+      "mimeType": "text/html",
+      "size": 1415,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\index.html",
+      "writtenBytes": 1445
+    },
+    {
+      "index": 1,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/Build/80f812359ad6b4f1954bc219db099ea4.wasm.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 4048373,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\80f812359ad6b4f1954bc219db099ea4.wasm.unityweb",
+      "writtenBytes": 4048373
+    },
+    {
+      "index": 2,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/Build/52cd144de21b665b1e442100b2c91f7d.data.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 4835119,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\52cd144de21b665b1e442100b2c91f7d.data.unityweb",
+      "writtenBytes": 4835119
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/Build/2e7efc67fd31182acb2e72a9426d7531.framework.js.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 74014,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\2e7efc67fd31182acb2e72a9426d7531.framework.js.unityweb",
+      "writtenBytes": 74014
+    },
+    {
+      "index": 4,
+      "status": 302,
+      "url": "https://www.youtube.com/game_api/v1",
+      "method": "GET",
+      "mimeType": "application/binary",
+      "size": 0,
+      "encoding": null,
+      "extracted": false,
+      "reason": "No response body embedded in HAR"
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/playgama-bridge-unity.js",
+      "method": "GET",
+      "mimeType": "application/x-javascript",
+      "size": 25085,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\playgama-bridge-unity.js",
+      "writtenBytes": 25931
+    },
+    {
+      "index": 6,
+      "status": 200,
+      "url": "https://www.youtube.com/s/ytgame/9867fa2a/ytgame.js",
+      "method": "GET",
+      "mimeType": "text/javascript",
+      "size": 65576,
+      "encoding": null,
+      "extracted": true,
+      "path": "_origins\\www.youtube.com\\s\\ytgame\\9867fa2a\\ytgame.js",
+      "writtenBytes": 65700
+    },
+    {
+      "index": 7,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/playgama-bridge.js",
+      "method": "GET",
+      "mimeType": "application/x-javascript",
+      "size": 223766,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\playgama-bridge.js",
+      "writtenBytes": 223766
+    },
+    {
+      "index": 8,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/playgama-bridge-config.json",
+      "method": "GET",
+      "mimeType": "application/json",
+      "size": 800,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\playgama-bridge-config.json",
+      "writtenBytes": 831
+    },
+    {
+      "index": 9,
+      "status": 404,
+      "url": "https://3724861607956707585.playables.usercontent.goog/favicon.ico",
+      "method": "GET",
+      "mimeType": "text/html",
+      "size": 1572,
+      "encoding": null,
+      "extracted": true,
+      "path": "favicon.ico",
+      "writtenBytes": 1583
+    },
+    {
+      "index": 10,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/Build/6f80bcc7f6af359737a278f20baa23cf.loader.js",
+      "method": "GET",
+      "mimeType": "application/x-javascript",
+      "size": 117365,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\Build\\6f80bcc7f6af359737a278f20baa23cf.loader.js",
+      "writtenBytes": 117365
+    },
+    {
+      "index": 11,
+      "status": 200,
+      "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/Build/2e7efc67fd31182acb2e72a9426d7531.framework.js.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 74014,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\2e7efc67fd31182acb2e72a9426d7531.framework.js__2.unityweb",
+      "writtenBytes": 74014
+    }
+  ]
+}
