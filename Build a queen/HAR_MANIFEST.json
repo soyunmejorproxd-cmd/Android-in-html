@@ -1,0 +1,162 @@
+{
+  "tool": "HAR Extractor Studio",
+  "version": "1.0",
+  "source": "C:\\Users\\USUARIO\\Downloads\\10542200469832840160.playables.usercontent.goog.har",
+  "entries": [
+    {
+      "index": 0,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/index.html",
+      "method": "GET",
+      "mimeType": "text/html",
+      "size": 8172,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\index.html",
+      "writtenBytes": 8382
+    },
+    {
+      "index": 1,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/TemplateData/style.css",
+      "method": "GET",
+      "mimeType": "text/css",
+      "size": 1696,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\TemplateData\\style.css",
+      "writtenBytes": 1729
+    },
+    {
+      "index": 2,
+      "status": 302,
+      "url": "https://www.youtube.com/game_api/v1",
+      "method": "GET",
+      "mimeType": "application/binary",
+      "size": 0,
+      "encoding": null,
+      "extracted": false,
+      "reason": "No response body embedded in HAR"
+    },
+    {
+      "index": 3,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/unarchiver.min.js",
+      "method": "GET",
+      "mimeType": "application/x-javascript",
+      "size": 4396,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\unarchiver.min.js",
+      "writtenBytes": 4397
+    },
+    {
+      "index": 4,
+      "status": 200,
+      "url": "https://www.youtube.com/s/ytgame/9867fa2a/ytgame.js",
+      "method": "GET",
+      "mimeType": "text/javascript",
+      "size": 65576,
+      "encoding": null,
+      "extracted": true,
+      "path": "_origins\\www.youtube.com\\s\\ytgame\\9867fa2a\\ytgame.js",
+      "writtenBytes": 65700
+    },
+    {
+      "index": 5,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/Build/BAQ7.loader.js",
+      "method": "GET",
+      "mimeType": "application/x-javascript",
+      "size": 114374,
+      "encoding": null,
+      "extracted": true,
+      "path": "v\\assets\\Build\\BAQ7.loader.js",
+      "writtenBytes": 114374
+    },
+    {
+      "index": 6,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/TemplateData/unity-logo-dark.png",
+      "method": "GET",
+      "mimeType": "image/png",
+      "size": 3042,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\TemplateData\\unity-logo-dark.png",
+      "writtenBytes": 3042
+    },
+    {
+      "index": 7,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/TemplateData/progress-bar-empty-dark.png",
+      "method": "GET",
+      "mimeType": "image/png",
+      "size": 96,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\TemplateData\\progress-bar-empty-dark.png",
+      "writtenBytes": 96
+    },
+    {
+      "index": 8,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/TemplateData/progress-bar-full-dark.png",
+      "method": "GET",
+      "mimeType": "image/png",
+      "size": 74,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\TemplateData\\progress-bar-full-dark.png",
+      "writtenBytes": 74
+    },
+    {
+      "index": 9,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/Build/BAQ7.framework.js.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 72462,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\BAQ7.framework.js.unityweb",
+      "writtenBytes": 72462
+    },
+    {
+      "index": 10,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/Build/BAQ7.wasm.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 5887640,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\BAQ7.wasm.unityweb",
+      "writtenBytes": 5887640
+    },
+    {
+      "index": 11,
+      "status": 404,
+      "url": "https://10542200469832840160.playables.usercontent.goog/favicon.ico",
+      "method": "GET",
+      "mimeType": "text/html",
+      "size": 1572,
+      "encoding": null,
+      "extracted": true,
+      "path": "favicon.ico",
+      "writtenBytes": 1583
+    },
+    {
+      "index": 12,
+      "status": 200,
+      "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/Build/BAQ7.data.unityweb",
+      "method": "GET",
+      "mimeType": "application/octet-stream",
+      "size": 8674936,
+      "encoding": "base64",
+      "extracted": true,
+      "path": "v\\assets\\Build\\BAQ7.data.unityweb",
+      "writtenBytes": 8674936
+    }
+  ]
+}
