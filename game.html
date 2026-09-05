@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffbfe">
+  <title>Cargando…</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400..700&family=Material+Symbols+Outlined:FILL,GRAD,opsz,wght@0..1,-50..200,20..48,100..700" rel="stylesheet">
+  <script type="importmap">
+  {
+    "imports": {
+      "@material/web/": "https://esm.run/@material/web@2.5.0/"
+    }
+  }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body { height: 100%; }
+    body.viewer-page { display: flex; flex-direction: column; min-height: 100vh; overflow: hidden; }
+    .viewer-bar { flex: 0 0 auto; border-bottom-color: var(--md-sys-color-outline-variant); }
+    .viewer-bar .app-bar__content { min-height: 64px; }
+    .viewer-title { min-width: 0; font-size: 16px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .viewer-main { position: relative; flex: 1 1 auto; min-height: 0; padding: 12px; background: var(--md-sys-color-surface-container); }
+    .game-frame { display: block; width: 100%; height: 100%; border: 0; border-radius: 24px; background: #000; }
+    .loading { position: absolute; inset: 12px; display: grid; place-items: center; border-radius: 24px; background: var(--md-sys-color-surface-container); }
+    .loading__box { display: grid; justify-items: center; gap: 10px; text-align: center; padding: 28px; }
+    .loading__icon { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 20px; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+    .loading__icon md-icon { --md-icon-size: 30px; }
+    .loading p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 14px; }
+    @media (max-width: 600px) {
+      .viewer-main { padding: 0; }
+      .game-frame, .loading { border-radius: 0; }
+      .loading { inset: 0; }
+    }
+  </style>
+</head>
+<body class="viewer-page">
+  <header class="app-bar viewer-bar">
+    <div class="app-bar__content">
+      <div style="display:flex;align-items:center;min-width:0;gap:4px;">
+        <md-icon-button id="back" aria-label="Volver">
+          <md-icon>arrow_back</md-icon>
+        </md-icon-button>
+        <span class="viewer-title" id="title">Cargando…</span>
+      </div>
+      <div class="app-bar__actions">
+        <md-icon-button id="reload" aria-label="Recargar">
+          <md-icon>refresh</md-icon>
+        </md-icon-button>
+        <md-filled-tonal-icon-button id="fullscreen" aria-label="Pantalla completa">
+          <md-icon>fullscreen</md-icon>
+        </md-filled-tonal-icon-button>
+      </div>
+    </div>
+  </header>
+
+  <main class="viewer-main">
+    <iframe id="gameFrame" class="game-frame" allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write" allowfullscreen title="Experiencia"></iframe>
+    <div class="loading" id="loading">
+      <div class="loading__box">
+        <div class="loading__icon"><md-icon>apps</md-icon></div>
+        <strong>Abriendo experiencia…</strong>
+        <p>Preparando el contenido.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    if (localStorage.getItem('aih-theme') === 'dark') root.classList.add('dark');
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get('game');
+    const frame = document.querySelector('#gameFrame');
+    const loading = document.querySelector('#loading');
+    let loadingTimer = null;
+
+    function showLoading() {
+      loading.hidden = false;
+      clearTimeout(loadingTimer);
+    }
+
+    function hideLoading() {
+      clearTimeout(loadingTimer);
+      loading.hidden = true;
+    }
+
+    function finishLoadingSoon() {
+      // Some WebGL/Unity experiences keep the iframe document alive while
+      // their own boot process continues, so relying only on iframe.onload
+      // can leave the launcher overlay stuck above an already-visible game.
+      clearTimeout(loadingTimer);
+      loadingTimer = setTimeout(hideLoading, 1200);
+    }
+
+    frame.addEventListener('load', () => {
+      // Normal path: the iframe document finished loading.
+      hideLoading();
+    });
+
+    fetch('games.json', {cache: 'no-store'})
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(games => {
+        const game = games.find(item => item.id === id);
+        if (!game) throw new Error('Experiencia no encontrada');
+        document.querySelector('#title').textContent = game.name;
+        frame.title = game.name;
+        document.title = `${game.name} — Android In Html`;
+        showLoading();
+        frame.src = game.entry;
+        finishLoadingSoon();
+      })
+      .catch(error => {
+        loading.innerHTML = `<div class="loading__box"><div class="loading__icon"><md-icon>error</md-icon></div><strong>No se pudo abrir esta experiencia</strong><p>${String(error.message).replace(/[<>]/g,'')}</p></div>`;
+      });
+
+    document.querySelector('#back').addEventListener('click', () => {
+      if (history.length > 1) history.back(); else location.href = 'index.html';
+    });
+    document.querySelector('#reload').addEventListener('click', () => {
+      showLoading();
+      try {
+        frame.contentWindow.location.reload();
+      } catch {
+        const current = frame.src;
+        frame.src = '';
+        requestAnimationFrame(() => frame.src = current);
+      }
+      finishLoadingSoon();
+    });
+    document.querySelector('#fullscreen').addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen?.();
+      else frame.requestFullscreen?.();
+    });
+  </script>
+</body>
+</html>

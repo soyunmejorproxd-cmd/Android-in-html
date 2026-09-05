@@ -1,0 +1,114 @@
+[
+  {
+    "id": "block-blast",
+    "name": "Block Blast",
+    "category": "Juegos",
+    "entry": "Block Blast/games/clblockblast.html",
+    "icon": "grid_view",
+    "description": "Rompe bloques y consigue la mejor puntuación."
+  },
+  {
+    "id": "bridge-race",
+    "name": "Bridge Race",
+    "category": "Juegos",
+    "entry": "Bridge Race/v/assets/index.html",
+    "icon": "construction",
+    "description": "Construye tu puente y llega primero."
+  },
+  {
+    "id": "build-a-queen",
+    "name": "Build a queen",
+    "category": "Juegos",
+    "entry": "Build a queen/v/assets/index.html",
+    "icon": "auto_awesome",
+    "description": "Construye tu estilo y supera los desafíos."
+  },
+  {
+    "id": "burger-life",
+    "name": "Burger Life",
+    "category": "Juegos",
+    "entry": "Burger Life/v/assets/index.html",
+    "icon": "lunch_dining",
+    "description": "Gestiona tu restaurante y prepara hamburguesas."
+  },
+  {
+    "id": "chrome",
+    "name": "Chrome",
+    "category": "Apps",
+    "entry": "Chrome/index.html",
+    "icon": "language",
+    "description": "Aplicación web de Chrome incluida en Android In Html."
+  },
+  {
+    "id": "geometry-dash",
+    "name": "Geometry Dash",
+    "category": "Juegos",
+    "entry": "Geometry Dash/index.html",
+    "icon": "bolt",
+    "description": "Salta, vuela y supera niveles al ritmo de la música."
+  },
+  {
+    "id": "going-balls",
+    "name": "Going Balls",
+    "category": "Juegos",
+    "entry": "Going Balls/v/assets/index.html",
+    "icon": "sports_soccer",
+    "description": "Controla la bola y supera pistas llenas de obstáculos."
+  },
+  {
+    "id": "hole-io",
+    "name": "Hole.io",
+    "category": "Juegos",
+    "entry": "Hole.io/v/assets/index.html",
+    "icon": "circle",
+    "description": "Absorbe objetos y haz crecer el agujero."
+  },
+  {
+    "id": "phone-case-diy",
+    "name": "Phone case DIY",
+    "category": "Juegos",
+    "entry": "Phone case DIY/_origins/15928053354325220490.playables.usercontent.goog/v/assets/index.html",
+    "icon": "phone_iphone",
+    "description": "Diseña y personaliza fundas para teléfonos."
+  },
+  {
+    "id": "pizza-ready",
+    "name": "Pizza Ready!",
+    "category": "Juegos",
+    "entry": "Pizza Ready!/_origins/5776750795450793656.playables.usercontent.goog/v/assets/index.html",
+    "icon": "local_pizza",
+    "description": "Prepara pizzas y haz crecer tu negocio."
+  },
+  {
+    "id": "save-the-dogs",
+    "name": "Save The Dogs",
+    "category": "Juegos",
+    "entry": "Save The Dogs/v/assets/index.html",
+    "icon": "pets",
+    "description": "Protege a los perros de los peligros."
+  },
+  {
+    "id": "seek-n-hide",
+    "name": "Seek N Hide",
+    "category": "Juegos",
+    "entry": "Seek N Hide/v/assets/index.html",
+    "icon": "visibility",
+    "description": "Busca, escóndete y sobrevive a cada ronda."
+  },
+  {
+    "id": "supreme-duelist-stickman",
+    "name": "Supreme Duelist Stickman",
+    "category": "Juegos",
+    "entry": "Supreme Duelist Stickman/v/assets/index.html",
+    "icon": "sports_kabaddi",
+    "description": "Combate con tu stickman en duelos llenos de acción."
+  },
+  {
+    "id": "worlds-of-wonders",
+    "name": "Worlds of wonders",
+    "category": "Juegos",
+    "entry": "Worlds of wonders/v/assets/index.html",
+    "icon": "public",
+    "description": "Explora un mundo de aventuras y desafíos."
+  }
+]

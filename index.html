@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffbfe">
+  <meta name="description" content="Android In Html — biblioteca de apps y juegos web.">
+  <title>Android In Html</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400..700&family=Material+Symbols+Outlined:FILL,GRAD,opsz,wght@0..1,-50..200,20..48,100..700" rel="stylesheet">
+
+  <!-- Material Web oficial de Google (Material 3). Carga del bundle oficial completo. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "@material/web/": "https://esm.run/@material/web@2.5.0/"
+    }
+  }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import {styles as typeScaleStyles} from '@material/web/typography/md-typescale-styles.js';
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, typeScaleStyles.styleSheet];
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-bar" id="appBar">
+    <div class="app-bar__content">
+      <a class="brand" href="./" aria-label="Android In Html — inicio">
+        <img class="brand__logo" src="logoAndroidInHtml.png" alt="Android In Html">
+        <span class="brand__copy">
+          <span class="brand__title">Android In Html</span>
+          <span class="brand__subtitle">Biblioteca de experiencias</span>
+        </span>
+      </a>
+
+      <nav class="app-bar__actions" aria-label="Acciones">
+        <md-icon-button id="themeBtn" aria-label="Cambiar tema">
+          <md-icon id="themeIcon">dark_mode</md-icon>
+        </md-icon-button>
+        <md-icon-button id="aboutBtn" aria-label="Información">
+          <md-icon>info</md-icon>
+        </md-icon-button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__copy">
+        <span class="eyebrow">ANDROID IN HTML</span>
+        <h1 id="heroTitle">Apps y juegos.<br>Directamente en la web.</h1>
+        <p>Una biblioteca para abrir cada experiencia sin saltar a la página interna del juego.</p>
+      </div>
+      <div class="hero__stat" aria-label="Número de experiencias">
+        <md-icon>apps</md-icon>
+        <span class="hero__number" id="count">14</span>
+        <span class="hero__label">experiencias</span>
+      </div>
+    </section>
+
+    <section class="library" aria-labelledby="libraryTitle">
+      <div class="library__top">
+        <div>
+          <h2 id="libraryTitle">Todas las experiencias</h2>
+          <p id="resultText">14 disponibles</p>
+        </div>
+        <md-outlined-button id="sortBtn">
+          <md-icon slot="icon">sort_by_alpha</md-icon>
+          Ordenar
+        </md-outlined-button>
+      </div>
+
+      <div class="controls">
+        <md-outlined-text-field id="search" label="Buscar" type="search">
+          <md-icon slot="leading-icon">search</md-icon>
+        </md-outlined-text-field>
+
+        <div class="filters" aria-label="Filtrar por categoría">
+          <md-filter-chip id="allChip" label="Todo" selected></md-filter-chip>
+          <md-filter-chip id="gamesChip" label="Juegos"></md-filter-chip>
+          <md-filter-chip id="appsChip" label="Apps"></md-filter-chip>
+        </div>
+      </div>
+
+      <section id="grid" class="experience-grid" aria-live="polite"></section>
+
+      <section id="empty" class="empty" hidden>
+        <md-icon>search_off</md-icon>
+        <h2>Sin resultados</h2>
+        <p>No hay experiencias que coincidan con la búsqueda actual.</p>
+        <md-filled-tonal-button id="resetBtn">
+          <md-icon slot="icon">restart_alt</md-icon>
+          Restablecer
+        </md-filled-tonal-button>
+      </section>
+    </section>
+  </main>
+
+  <md-dialog id="aboutDialog">
+    <div slot="headline">Android In Html</div>
+    <div slot="content">Biblioteca de experiencias web. Cada elemento se abre mediante el reproductor central de Android In Html.</div>
+    <div slot="actions">
+      <md-text-button id="closeAbout">Cerrar</md-text-button>
+    </div>
+  </md-dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
