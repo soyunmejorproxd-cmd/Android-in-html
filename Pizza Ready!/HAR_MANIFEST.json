@@ -1,0 +1,119 @@
+[
+  {
+    "index": 0,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/index.html",
+    "mimeType": "text/html",
+    "size": 9478,
+    "encoding": null,
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/index.html"
+  },
+  {
+    "index": 1,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/TemplateData/style.css",
+    "mimeType": "text/css",
+    "size": 1663,
+    "encoding": null,
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/TemplateData/style.css"
+  },
+  {
+    "index": 2,
+    "status": 302,
+    "url": "https://www.youtube.com/game_api/v1",
+    "mimeType": "application/binary",
+    "size": 0,
+    "encoding": null,
+    "extracted": false
+  },
+  {
+    "index": 3,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/unarchiver.min.js",
+    "mimeType": "application/x-javascript",
+    "size": 4396,
+    "encoding": null,
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/unarchiver.min.js"
+  },
+  {
+    "index": 4,
+    "status": 200,
+    "url": "https://www.youtube.com/s/ytgame/9867fa2a/ytgame.js",
+    "mimeType": "text/javascript",
+    "size": 65576,
+    "encoding": null,
+    "extracted": true,
+    "path": "_origins/www.youtube.com/s/ytgame/9867fa2a/ytgame.js"
+  },
+  {
+    "index": 5,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/Build/web.loader.js",
+    "mimeType": "application/x-javascript",
+    "size": 114374,
+    "encoding": null,
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/Build/web.loader.js"
+  },
+  {
+    "index": 6,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/Build/web.framework.js.unityweb",
+    "mimeType": "application/octet-stream",
+    "size": 69419,
+    "encoding": "base64",
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/Build/web.framework.js.unityweb"
+  },
+  {
+    "index": 7,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/Build/web.wasm.unityweb",
+    "mimeType": "application/octet-stream",
+    "size": 4942167,
+    "encoding": "base64",
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/Build/web.wasm.unityweb"
+  },
+  {
+    "index": 8,
+    "status": 200,
+    "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/Build/web.data.unityweb",
+    "mimeType": "application/octet-stream",
+    "size": 15052227,
+    "encoding": "base64",
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/v/assets/Build/web.data.unityweb"
+  },
+  {
+    "index": 9,
+    "status": 404,
+    "url": "https://5776750795450793656.playables.usercontent.goog/favicon.ico",
+    "mimeType": "text/html",
+    "size": 1572,
+    "encoding": null,
+    "extracted": true,
+    "path": "_origins/5776750795450793656.playables.usercontent.goog/favicon.ico"
+  },
+  {
+    "index": 10,
+    "status": 204,
+    "url": "https://csp.withgoogle.com/csp/youtube-gameplay-team",
+    "mimeType": "x-unknown",
+    "size": 0,
+    "encoding": null,
+    "extracted": false
+  },
+  {
+    "index": 11,
+    "status": 204,
+    "url": "https://csp.withgoogle.com/csp/youtube-gameplay-team",
+    "mimeType": "x-unknown",
+    "size": 0,
+    "encoding": null,
+    "extracted": false
+  }
+]
