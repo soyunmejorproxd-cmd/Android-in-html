@@ -1,0 +1,135 @@
+<style>
+    .loading-container {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        font-family: monospace;
+    }
+
+    #lds-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        top: 0;
+        opacity: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #202020;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in;
+    }
+
+    .icon-wrapper {
+        position: relative;
+        width: 75px;
+        height: 75px;
+    }
+
+    #lds-game-icon,
+    #lds-game-icon-blur {
+        width: 75px;
+        height: 75px;
+        background-size: cover;
+        background-position: center;
+        background-color: #fff8dc;
+        border-radius: 10px;
+    }
+
+    #lds-game-icon {
+        position: relative;
+        animation: icon-fade-in 0.4s ease-in, icon-bubble 1.5s ease-in-out infinite;
+        z-index: 2;
+    }
+
+    #lds-game-icon-blur {
+        position: absolute;
+        top: 0;
+        left: 0;
+        filter: blur(25px);
+        animation: icon-fade-in 0.5s ease-in, icon-blur-bubble 1.5s ease-in-out infinite;
+        z-index: 1;
+    }
+
+    #lds-text {
+        color: #fff;
+        display: flex;
+        font-size: 1rem;
+        margin: 25px 0 10px;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        text-shadow: 0 .5px 1px #999;
+    }
+
+    #lds-warn-text {
+        margin-top: 25px;
+        padding: 15px;
+        max-width: 80%;
+        color: #fefe00;
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: center;
+        display: none;
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    @keyframes icon-fade-in {
+        from {
+            opacity: 0;
+            transform: scale(0.1);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes icon-blur-bubble {
+
+        0%,
+        100% {
+            transform: scale(1) translateY(0);
+        }
+
+        50% {
+            transform: scale(1.25) translateY(0);
+        }
+    }
+
+    @keyframes icon-bubble {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.25);
+        }
+    }
+</style>
+
+<div id="loading-screen" class="loading-container">
+    <div id="lds-content">
+        <div class="icon-wrapper">
+            <div id="lds-game-icon-blur"></div>
+            <div id="lds-game-icon"></div>
+        </div>
+        <div id="lds-text">
+            <span id="lds-percent">0</span>%
+        </div>
+        <span id="lds-warn-text">We detected a slow internet, trying to load your game...</span>
+    </div>
+</div>
