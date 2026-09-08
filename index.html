@@ -3,453 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Catálogo de Juegos y Apps</title>
+    <title>Android in HTML</title>
     
-    <!-- Fuentes y Material Symbols de Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts & Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    
     <style>
-        /* =========================================
-           Variables de Material Design 3 (Tema Claro/Oscuro Adaptable)
-           ========================================= */
         :root {
-            /* Colores base (Light Theme Baseline) */
-            --md-sys-color-primary: #0061a4;
-            --md-sys-color-on-primary: #ffffff;
-            --md-sys-color-primary-container: #d1e4ff;
-            --md-sys-color-on-primary-container: #001d36;
-            
-            --md-sys-color-secondary-container: #d7e3f0;
-            --md-sys-color-on-secondary-container: #101c2b;
-            
-            --md-sys-color-background: #fdfbff;
-            --md-sys-color-on-background: #1a1c1e;
-            
-            --md-sys-color-surface: #fdfbff;
-            --md-sys-color-on-surface: #1a1c1e;
-            --md-sys-color-surface-variant: #dfe2eb;
-            --md-sys-color-on-surface-variant: #43474e;
-            
-            --md-sys-color-surface-container-low: #f3f3f7;
-            --md-sys-color-surface-container: #ededf1;
-            --md-sys-color-surface-container-high: #e7e8ec;
-
-            --md-elevation-1: 0px 1px 2px 0px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
-            --md-elevation-2: 0px 1px 2px 0px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15);
+            /* Colores Material You / Wallpaper extraídos */
+            --sys-color-background: #0f1416;
+            --sys-color-surface: rgba(25, 28, 29, 0.75);
+            --sys-color-on-surface: #e1e3e3;
+            --sys-color-primary: #89d3df;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --md-sys-color-primary: #9ecaef;
-                --md-sys-color-on-primary: #003258;
-                --md-sys-color-primary-container: #00497d;
-                --md-sys-color-on-primary-container: #d1e4ff;
-                
-                --md-sys-color-secondary-container: #354a5f;
-                --md-sys-color-on-secondary-container: #d7e3f0;
-                
-                --md-sys-color-background: #1a1c1e;
-                --md-sys-color-on-background: #e2e2e6;
-                
-                --md-sys-color-surface: #1a1c1e;
-                --md-sys-color-on-surface: #e2e2e6;
-                --md-sys-color-surface-variant: #43474e;
-                --md-sys-color-on-surface-variant: #c3c7cf;
-                
-                --md-sys-color-surface-container-low: #1c1f21;
-                --md-sys-color-surface-container: #202325;
-                --md-sys-color-surface-container-high: #2b2e30;
-                
-                --md-elevation-1: 0px 1px 3px 1px rgba(0,0,0,0.5);
-                --md-elevation-2: 0px 2px 6px 2px rgba(0,0,0,0.5);
-            }
-        }
-
-        /* =========================================
-           Reset y Estilos Generales
-           ========================================= */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Roboto', sans-serif;
+            user-select: none; /* Evita que el texto se seleccione como en una web normal */
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--md-sys-color-background);
-            color: var(--md-sys-color-on-background);
-            line-height: 1.5;
-            min-height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Simulador de Pantalla de Dispositivo */
+        .device-screen {
+            width: 100%;
+            height: 100%;
+            max-width: 412px; /* Ancho típico de un teléfono moderno */
+            position: relative;
+            background: linear-gradient(135deg, #1e3c45 0%, #0a181c 100%); /* Wallpaper simulado */
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
-        /* =========================================
-           Top App Bar & Búsqueda
-           ========================================= */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background-color: var(--md-sys-color-surface);
-            padding: 16px 24px 8px;
+        @media (min-width: 413px) {
+            .device-screen {
+                height: 90vh;
+                border-radius: 32px;
+                box-shadow: 0 0 0 12px #222, 0 20px 40px rgba(0,0,0,0.5); /* Simula el marco físico del celular en PC */
+            }
+        }
+
+        /* Status Bar (Barra superior) */
+        .status-bar {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            transition: box-shadow 0.2s ease, background-color 0.2s ease;
-        }
-
-        header.scrolled {
-            background-color: var(--md-sys-color-surface-container);
-            box-shadow: var(--md-elevation-1);
-        }
-
-        .top-bar-title {
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--md-sys-color-on-surface);
-        }
-
-        .search-bar {
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            background-color: var(--md-sys-color-surface-container-high);
-            border-radius: 28px;
-            padding: 0 16px;
-            height: 56px;
-            gap: 12px;
-            transition: background-color 0.2s;
-        }
-
-        .search-bar:focus-within {
-            background-color: var(--md-sys-color-surface-variant);
-        }
-
-        .search-bar .material-symbols-rounded {
-            color: var(--md-sys-color-on-surface-variant);
-        }
-
-        .search-input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            font-size: 16px;
-            color: var(--md-sys-color-on-surface);
-            outline: none;
-            font-family: inherit;
-        }
-
-        .search-input::placeholder {
-            color: var(--md-sys-color-on-surface-variant);
-        }
-
-        /* =========================================
-           Filtros (Chips)
-           ========================================= */
-        .filter-container {
-            padding: 8px 24px 16px;
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
-        }
-        
-        .filter-container::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
-
-        .chip {
-            display: inline-flex;
-            align-items: center;
-            height: 32px;
-            padding: 0 16px;
-            border-radius: 8px;
-            border: 1px solid var(--md-sys-color-surface-variant);
-            background-color: transparent;
-            color: var(--md-sys-color-on-surface-variant);
+            padding: 12px 24px;
+            color: white;
             font-size: 14px;
             font-weight: 500;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s ease;
+            z-index: 10;
         }
 
-        .chip.active {
-            background-color: var(--md-sys-color-secondary-container);
-            color: var(--md-sys-color-on-secondary-container);
-            border-color: transparent;
-        }
-
-        /* =========================================
-           Grilla de Tarjetas (Cards)
-           ========================================= */
-        main {
-            flex: 1;
-            padding: 0 24px 32px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
-        }
-
-        .card {
+        .status-icons {
             display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 16px;
-            border-radius: 24px;
-            background-color: var(--md-sys-color-surface-container-low);
-            cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s;
-            text-decoration: none;
-        }
-
-        .card:hover {
-            background-color: var(--md-sys-color-surface-container);
-            transform: translateY(-2px);
-        }
-
-        .card:active {
-            transform: scale(0.96);
-            background-color: var(--md-sys-color-surface-container-high);
-        }
-
-        .card-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            background-color: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            display: flex;
+            gap: 6px;
             align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
         }
 
-        .card-icon .material-symbols-rounded {
+        .status-icons span {
+            font-size: 16px;
+        }
+
+        /* At a Glance (Widget de fecha) */
+        .at-a-glance {
+            padding: 24px;
+            color: white;
+            font-size: 22px;
+            font-weight: 400;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* App Grid (Cajón de aplicaciones) */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px 12px;
+            padding: 0 24px;
+            margin-top: 20px;
+            flex-grow: 1;
+            align-content: start;
+            overflow-y: auto;
+            /* Ocultar barra de scroll para mayor realismo */
+            scrollbar-width: none; 
+        }
+        .app-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* App Item */
+        .app-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.1s;
+        }
+
+        .app-item:active {
+            transform: scale(0.9); /* Efecto de toque */
+        }
+
+        /* Contenedor del ícono (Preparado para imágenes futuras) */
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--sys-color-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 22px; /* Squircle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--sys-color-primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .app-icon span {
             font-size: 32px;
         }
 
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex: 1;
-            min-width: 0; /* Previene desbordamiento de texto */
-        }
-
-        .card-title {
-            font-size: 16px;
+        .app-name {
+            font-size: 12px;
             font-weight: 500;
-            color: var(--md-sys-color-on-surface);
+            text-align: center;
+            width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 4px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
         }
 
-        .card-desc {
-            font-size: 14px;
-            color: var(--md-sys-color-on-surface-variant);
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 8px;
-        }
-
-        .card-badge {
-            align-self: flex-start;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--md-sys-color-primary);
-            padding: 2px 8px;
-            border-radius: 8px;
-            background-color: var(--md-sys-color-primary-container);
-        }
-
-        /* =========================================
-           Estado Vacío (Sin resultados)
-           ========================================= */
-        .empty-state {
-            grid-column: 1 / -1;
+        /* Barra de búsqueda (Search Pill) */
+        .search-widget {
+            margin: 24px;
+            background-color: var(--sys-color-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 28px;
+            height: 56px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 48px 24px;
-            text-align: center;
-            color: var(--md-sys-color-on-surface-variant);
+            padding: 0 16px;
+            color: var(--sys-color-on-surface);
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .empty-state .material-symbols-rounded {
-            font-size: 48px;
-            margin-bottom: 16px;
-            opacity: 0.5;
+        .search-widget .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -1px;
         }
+
+        /* Gesture Navigation Bar */
+        .nav-bar {
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 8px;
+            background: transparent;
+        }
+
+        .nav-pill {
+            width: 108px;
+            height: 4px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 2px;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Encabezado con Búsqueda -->
-    <header id="app-header">
-        <h1 class="top-bar-title">Descubrir</h1>
-        <div class="search-bar">
-            <span class="material-symbols-rounded">search</span>
-            <input type="text" id="searchInput" class="search-input" placeholder="Buscar juegos o apps...">
+    <div class="device-screen">
+        
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div id="clock">12:00</div>
+            <div class="status-icons">
+                <span class="material-symbols-outlined">wifi</span>
+                <span class="material-symbols-outlined">signal_cellular_4_bar</span>
+                <span class="material-symbols-outlined">battery_full</span>
+            </div>
         </div>
-    </header>
 
-    <!-- Filtros de Categoría -->
-    <div class="filter-container" id="filterContainer">
-        <button class="chip active" data-filter="Todos">Todos</button>
-        <button class="chip" data-filter="Juegos">Juegos</button>
-        <button class="chip" data-filter="Apps">Apps</button>
+        <!-- At a Glance -->
+        <div class="at-a-glance" id="date-widget">
+            Lun, 1 Ene
+        </div>
+
+        <!-- Apps Grid -->
+        <div class="app-grid" id="app-grid">
+            <!-- Los iconos se inyectarán aquí -->
+        </div>
+
+        <!-- Search Widget -->
+        <div class="search-widget">
+            <span class="logo">G</span>
+            <span style="opacity: 0.7; font-size: 16px; flex-grow: 1;">Buscar...</span>
+            <span class="material-symbols-outlined">mic</span>
+        </div>
+
+        <!-- Gesture Navigation Bar -->
+        <div class="nav-bar">
+            <div class="nav-pill"></div>
+        </div>
+
     </div>
 
-    <!-- Contenedor Principal (Catálogo) -->
-    <main>
-        <div class="grid-container" id="catalogGrid">
-            <!-- Las tarjetas se insertarán aquí dinámicamente -->
-        </div>
-    </main>
-
     <script>
-        /* =========================================
-           Lógica de la Aplicación
-           ========================================= */
-        
-        let allItems = [];
-        let currentFilter = 'Todos';
-        let searchQuery = '';
-
-        // Elementos del DOM
-        const catalogGrid = document.getElementById('catalogGrid');
-        const searchInput = document.getElementById('searchInput');
-        const chips = document.querySelectorAll('.chip');
-        const header = document.getElementById('app-header');
-
-        // Efecto de sombra en el header al hacer scroll
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // 1. Cargar datos del JSON
-        async function loadData() {
-            try {
-                const response = await fetch('games.json');
-                if (!response.ok) throw new Error('No se pudo cargar games.json');
-                allItems = await response.json();
-            } catch (error) {
-                console.warn("Fallo al cargar games.json local. Usando datos de respaldo incrustados.", error);
-                // Datos de respaldo integrados (tu JSON original) por si hay problemas de CORS al abrir el archivo sin servidor.
-                allItems = [
-                  { "id": "block-blast", "name": "Block Blast", "category": "Juegos", "url": "https://pinkdev.d13qic2f6zga3.amplifyapp.com/games/clblockblast.html", "icon": "grid_view", "description": "Rompe bloques y consigue la mejor puntuación." },
-                  { "id": "bridge-race", "name": "Bridge Race", "category": "Juegos", "url": "https://2220347414531419227.playables.usercontent.goog/v/assets/index.html", "icon": "construction", "description": "Construye tu puente y llega primero." },
-                  { "id": "build-a-queen", "name": "Build a queen", "category": "Juegos", "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/index.html", "icon": "auto_awesome", "description": "Construye tu estilo y supera los desafíos." },
-                  { "id": "burger-life", "name": "Burger Life", "category": "Juegos", "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/index.html", "icon": "lunch_dining", "description": "Gestiona tu restaurante y prepara hamburguesas." },
-                  { "id": "chrome", "name": "Chrome", "category": "Apps", "entry": "Chrome/index.html", "icon": "language", "description": "Aplicación web de Chrome incluida en Android In Html." },
-                  { "id": "geometry-dash", "name": "Geometry Dash", "category": "Juegos", "url": "", "icon": "bolt", "description": "Salta, vuela y supera niveles al ritmo de la música." },
-                  { "id": "going-balls", "name": "Going Balls", "category": "Juegos", "url": "https://2382389492886359936.playables.usercontent.goog/v/assets/index.html", "icon": "sports_soccer", "description": "Controla la bola y supera pistas llenas de obstáculos." },
-                  { "id": "hole-io", "name": "Hole.io", "category": "Juegos", "url": "https://2588800991068309738.playables.usercontent.goog/v/assets/index.html", "icon": "circle", "description": "Absorbe objetos y haz crecer el agujero." },
-                  { "id": "phone-case-diy", "name": "Phone case DIY", "category": "Juegos", "url": "https://15928053354325220490.playables.usercontent.goog/v/assets/index.html", "icon": "phone_iphone", "description": "Diseña y personaliza fundas para teléfonos." },
-                  { "id": "pizza-ready", "name": "Pizza Ready!", "category": "Juegos", "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/index.html", "icon": "local_pizza", "description": "Prepara pizzas y haz crecer tu negocio." },
-                  { "id": "save-the-dogs", "name": "Save The Dogs", "category": "Juegos", "url": "https://11031894482352440215.playables.usercontent.goog/v/assets/index.html", "icon": "pets", "description": "Protege a los perros de los peligros." },
-                  { "id": "seek-n-hide", "name": "Seek N Hide", "category": "Juegos", "url": "https://8328750458724478102.playables.usercontent.goog/v/assets/index.html", "icon": "visibility", "description": "Busca, escóndete y sobrevive a cada ronda." },
-                  { "id": "supreme-duelist-stickman", "name": "Supreme Duelist Stickman", "category": "Juegos", "entry": "Supreme Duelist Stickman/v/assets/index.html", "icon": "sports_kabaddi", "description": "Combate con tu stickman en duelos llenos de acción." },
-                  { "id": "worlds-of-wonders", "name": "Worlds of wonders", "category": "Juegos", "entry": "Worlds of wonders/v/assets/index.html", "icon": "public", "description": "Explora un mundo de aventuras y desafíos." }
-                ];
-            }
-            renderCatalog();
-        }
-
-        // 2. Función para renderizar el catálogo con base en los filtros
-        function renderCatalog() {
-            // Filtrar por categoría
-            let filteredItems = currentFilter === 'Todos' 
-                ? allItems 
-                : allItems.filter(item => item.category === currentFilter);
+        // Reloj y Fecha real
+        function updateTime() {
+            const now = new Date();
             
-            // Filtrar por búsqueda de texto
-            if (searchQuery) {
-                const query = searchQuery.toLowerCase();
-                filteredItems = filteredItems.filter(item => 
-                    item.name.toLowerCase().includes(query) || 
-                    item.description.toLowerCase().includes(query)
-                );
+            // Reloj
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock').innerText = timeStr;
+
+            // Fecha (At a Glance)
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            let dateStr = now.toLocaleDateString('es-ES', options);
+            dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+            document.getElementById('date-widget').innerText = dateStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Datos Fallback
+        const fallbackGames = [
+            { "id": "chrome", "name": "Chrome", "url": "./Chrome/index.html", "icon": "language" },
+            { "id": "block-blast", "name": "Block Blast", "url": "https://pinkdev.d13qic2f6zga3.amplifyapp.com/games/clblockblast.html", "icon": "grid_view" },
+            { "id": "bridge-race", "name": "Bridge Race", "url": "https://2220347414531419227.playables.usercontent.goog/v/assets/index.html", "icon": "construction" },
+            { "id": "build-a-queen", "name": "Build a queen", "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/index.html", "icon": "auto_awesome" },
+            { "id": "burger-life", "name": "Burger Life", "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/index.html", "icon": "lunch_dining" },
+            { "id": "geometry-dash", "name": "Geometry Dash", "url": "", "icon": "bolt" },
+            { "id": "going-balls", "name": "Going Balls", "url": "https://2382389492886359936.playables.usercontent.goog/v/assets/index.html", "icon": "sports_soccer" },
+            { "id": "hole-io", "name": "Hole.io", "url": "https://2588800991068309738.playables.usercontent.goog/v/assets/index.html", "icon": "circle" },
+            { "id": "phone-case-diy", "name": "Phone case DIY", "url": "https://15928053354325220490.playables.usercontent.goog/v/assets/index.html", "icon": "phone_iphone" },
+            { "id": "pizza-ready", "name": "Pizza Ready!", "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/index.html", "icon": "local_pizza" },
+            { "id": "save-the-dogs", "name": "Save The Dogs", "url": "https://11031894482352440215.playables.usercontent.goog/v/assets/index.html", "icon": "pets" },
+            { "id": "seek-n-hide", "name": "Seek N Hide", "url": "https://8328750458724478102.playables.usercontent.goog/v/assets/index.html", "icon": "visibility" },
+            { "id": "supreme-duelist-stickman", "name": "Supreme Duelist Stickman", "url": "./Supreme%20Duelist%20Stickman/v/assets/index.html", "icon": "sports_kabaddi" },
+            { "id": "worlds-of-wonders", "name": "Worlds of wonders", "url": "./Worlds%20of%20wonders/v/assets/index.html", "icon": "public" }
+        ];
+
+        async function loadApps() {
+            const grid = document.getElementById('app-grid');
+            let games = [];
+
+            try {
+                const res = await fetch('games.json');
+                if (!res.ok) throw new Error();
+                games = await res.json();
+            } catch (e) {
+                games = fallbackGames;
             }
 
-            // Limpiar contenedor
-            catalogGrid.innerHTML = '';
-
-            // Renderizar estado vacío
-            if (filteredItems.length === 0) {
-                catalogGrid.innerHTML = `
-                    <div class="empty-state">
-                        <span class="material-symbols-rounded">search_off</span>
-                        <h2>No hay resultados</h2>
-                        <p>Intenta buscar con otros términos.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Renderizar tarjetas
-            filteredItems.forEach(item => {
-                const card = document.createElement('a');
-                card.className = 'card';
-                // Navegación enviando el ID a game.html
-                card.href = `game.html?id=${item.id}`; 
+            games.forEach(game => {
+                const appItem = document.createElement('div');
+                appItem.className = 'app-item';
                 
-                card.innerHTML = `
-                    <div class="card-icon">
-                        <span class="material-symbols-rounded">${item.icon}</span>
+                // Redirigir a game.html (el puente/lanzador) al hacer clic
+                appItem.onclick = () => {
+                    window.location.href = `game.html?id=${game.id}`;
+                };
+
+                appItem.innerHTML = `
+                    <div class="app-icon">
+                        <span class="material-symbols-outlined">${game.icon}</span>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${item.name}</h3>
-                        <p class="card-desc">${item.description}</p>
-                        <span class="card-badge">${item.category}</span>
-                    </div>
+                    <span class="app-name">${game.name}</span>
                 `;
-                catalogGrid.appendChild(card);
+                
+                grid.appendChild(appItem);
             });
         }
 
-        // 3. Event Listeners
-        
-        // Listener de búsqueda
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderCatalog();
-        });
-
-        // Listener de chips (filtros)
-        chips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                // Actualizar UI de chips
-                chips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                
-                // Actualizar estado y renderizar
-                currentFilter = chip.getAttribute('data-filter');
-                renderCatalog();
-            });
-        });
-
-        // 4. Iniciar la aplicación
-        document.addEventListener('DOMContentLoaded', loadData);
-
+        window.onload = loadApps;
     </script>
 </body>
 </html>
