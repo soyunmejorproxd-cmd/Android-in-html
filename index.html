@@ -3,299 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Android in HTML</title>
+    <title>Android in HTML - Launcher</title>
     
-    <!-- Google Fonts & Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
-    
-    <style>
-        :root {
-            /* Colores Material You / Wallpaper extraídos */
-            --sys-color-background: #0f1416;
-            --sys-color-surface: rgba(25, 28, 29, 0.75);
-            --sys-color-on-surface: #e1e3e3;
-            --sys-color-primary: #89d3df;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            user-select: none; /* Evita que el texto se seleccione como en una web normal */
-        }
-
-        body {
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Simulador de Pantalla de Dispositivo */
-        .device-screen {
-            width: 100%;
-            height: 100%;
-            max-width: 412px; /* Ancho típico de un teléfono moderno */
-            position: relative;
-            background: linear-gradient(135deg, #1e3c45 0%, #0a181c 100%); /* Wallpaper simulado */
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        @media (min-width: 413px) {
-            .device-screen {
-                height: 90vh;
-                border-radius: 32px;
-                box-shadow: 0 0 0 12px #222, 0 20px 40px rgba(0,0,0,0.5); /* Simula el marco físico del celular en PC */
-            }
-        }
-
-        /* Status Bar (Barra superior) */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 24px;
-            color: white;
-            font-size: 14px;
-            font-weight: 500;
-            z-index: 10;
-        }
-
-        .status-icons {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-
-        .status-icons span {
-            font-size: 16px;
-        }
-
-        /* At a Glance (Widget de fecha) */
-        .at-a-glance {
-            padding: 24px;
-            color: white;
-            font-size: 22px;
-            font-weight: 400;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-        }
-
-        /* App Grid (Cajón de aplicaciones) */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px 12px;
-            padding: 0 24px;
-            margin-top: 20px;
-            flex-grow: 1;
-            align-content: start;
-            overflow-y: auto;
-            /* Ocultar barra de scroll para mayor realismo */
-            scrollbar-width: none; 
-        }
-        .app-grid::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* App Item */
-        .app-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.1s;
-        }
-
-        .app-item:active {
-            transform: scale(0.9); /* Efecto de toque */
-        }
-
-        /* Contenedor del ícono (Preparado para imágenes futuras) */
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            background-color: var(--sys-color-surface);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 22px; /* Squircle */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--sys-color-primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .app-icon span {
-            font-size: 32px;
-        }
-
-        .app-name {
-            font-size: 12px;
-            font-weight: 500;
-            text-align: center;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-        }
-
-        /* Barra de búsqueda (Search Pill) */
-        .search-widget {
-            margin: 24px;
-            background-color: var(--sys-color-surface);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 28px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            color: var(--sys-color-on-surface);
-            gap: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .search-widget .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: -1px;
-        }
-
-        /* Gesture Navigation Bar */
-        .nav-bar {
-            height: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-bottom: 8px;
-            background: transparent;
-        }
-
-        .nav-pill {
-            width: 108px;
-            height: 4px;
-            background-color: rgba(255,255,255,0.8);
-            border-radius: 2px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="device-screen">
+    <div class="launcher-root">
         
         <!-- Status Bar -->
-        <div class="status-bar">
+        <header class="status-bar">
             <div id="clock">12:00</div>
             <div class="status-icons">
                 <span class="material-symbols-outlined">wifi</span>
                 <span class="material-symbols-outlined">signal_cellular_4_bar</span>
                 <span class="material-symbols-outlined">battery_full</span>
             </div>
-        </div>
+        </header>
 
-        <!-- At a Glance -->
-        <div class="at-a-glance" id="date-widget">
-            Lun, 1 Ene
-        </div>
+        <!-- Home Screen (Workspace) -->
+        <main class="home-screen" id="home-screen">
+            <div class="at-a-glance">
+                <div class="date-text" id="date-widget">Lun, 1 Ene</div>
+                <div class="weather-text"><span class="material-symbols-outlined">partly_cloudy_day</span> 24°C</div>
+            </div>
+            
+            <div class="workspace-grid">
+                <!-- Espacio libre para futuros accesos directos o widgets -->
+            </div>
 
-        <!-- Apps Grid -->
-        <div class="app-grid" id="app-grid">
-            <!-- Los iconos se inyectarán aquí -->
-        </div>
+            <!-- Dock / Favoritos -->
+            <div class="dock-container">
+                <div class="search-widget" onclick="toggleDrawer()">
+                    <span class="logo">G</span>
+                    <span class="search-placeholder">Buscar aplicaciones...</span>
+                    <span class="material-symbols-outlined">mic</span>
+                </div>
+                <div class="dock-apps" id="dock-apps">
+                    <!-- Apps ancladas se pueden generar aquí -->
+                </div>
+            </div>
+        </main>
 
-        <!-- Search Widget -->
-        <div class="search-widget">
-            <span class="logo">G</span>
-            <span style="opacity: 0.7; font-size: 16px; flex-grow: 1;">Buscar...</span>
-            <span class="material-symbols-outlined">mic</span>
-        </div>
+        <!-- App Drawer (Cajón de Aplicaciones) -->
+        <section class="app-drawer" id="app-drawer">
+            <div class="drawer-handle-container" onclick="toggleDrawer()">
+                <div class="drawer-handle"></div>
+            </div>
+            
+            <div class="drawer-search">
+                <span class="material-symbols-outlined">search</span>
+                <input type="text" id="app-search" placeholder="Buscar apps" oninput="filterApps()">
+                <span class="material-symbols-outlined" onclick="toggleDrawer()">expand_more</span>
+            </div>
+
+            <div class="app-grid" id="app-grid">
+                <!-- Los iconos se inyectarán aquí -->
+            </div>
+        </section>
 
         <!-- Gesture Navigation Bar -->
-        <div class="nav-bar">
+        <footer class="nav-bar" onclick="toggleDrawer()">
             <div class="nav-pill"></div>
-        </div>
+        </footer>
 
     </div>
 
     <script>
-        // Reloj y Fecha real
+        // Actualización de reloj y fecha
         function updateTime() {
             const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             
-            // Reloj
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('clock').innerText = timeStr;
-
-            // Fecha (At a Glance)
             const options = { weekday: 'short', month: 'short', day: 'numeric' };
             let dateStr = now.toLocaleDateString('es-ES', options);
-            dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-            document.getElementById('date-widget').innerText = dateStr;
+            document.getElementById('date-widget').innerText = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
         }
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Datos Fallback
-        const fallbackGames = [
-            { "id": "chrome", "name": "Chrome", "url": "./Chrome/index.html", "icon": "language" },
-            { "id": "block-blast", "name": "Block Blast", "url": "https://pinkdev.d13qic2f6zga3.amplifyapp.com/games/clblockblast.html", "icon": "grid_view" },
-            { "id": "bridge-race", "name": "Bridge Race", "url": "https://2220347414531419227.playables.usercontent.goog/v/assets/index.html", "icon": "construction" },
-            { "id": "build-a-queen", "name": "Build a queen", "url": "https://10542200469832840160.playables.usercontent.goog/v/assets/index.html", "icon": "auto_awesome" },
-            { "id": "burger-life", "name": "Burger Life", "url": "https://3724861607956707585.playables.usercontent.goog/v/assets/index.html", "icon": "lunch_dining" },
-            { "id": "geometry-dash", "name": "Geometry Dash", "url": "", "icon": "bolt" },
-            { "id": "going-balls", "name": "Going Balls", "url": "https://2382389492886359936.playables.usercontent.goog/v/assets/index.html", "icon": "sports_soccer" },
-            { "id": "hole-io", "name": "Hole.io", "url": "https://2588800991068309738.playables.usercontent.goog/v/assets/index.html", "icon": "circle" },
-            { "id": "phone-case-diy", "name": "Phone case DIY", "url": "https://15928053354325220490.playables.usercontent.goog/v/assets/index.html", "icon": "phone_iphone" },
-            { "id": "pizza-ready", "name": "Pizza Ready!", "url": "https://5776750795450793656.playables.usercontent.goog/v/assets/index.html", "icon": "local_pizza" },
-            { "id": "save-the-dogs", "name": "Save The Dogs", "url": "https://11031894482352440215.playables.usercontent.goog/v/assets/index.html", "icon": "pets" },
-            { "id": "seek-n-hide", "name": "Seek N Hide", "url": "https://8328750458724478102.playables.usercontent.goog/v/assets/index.html", "icon": "visibility" },
-            { "id": "supreme-duelist-stickman", "name": "Supreme Duelist Stickman", "url": "./Supreme%20Duelist%20Stickman/v/assets/index.html", "icon": "sports_kabaddi" },
-            { "id": "worlds-of-wonders", "name": "Worlds of wonders", "url": "./Worlds%20of%20wonders/v/assets/index.html", "icon": "public" }
-        ];
+        // Lógica del Cajón de Aplicaciones
+        const drawer = document.getElementById('app-drawer');
+        const homeScreen = document.getElementById('home-screen');
+        let allApps = [];
 
-        async function loadApps() {
-            const grid = document.getElementById('app-grid');
-            let games = [];
-
-            try {
-                const res = await fetch('games.json');
-                if (!res.ok) throw new Error();
-                games = await res.json();
-            } catch (e) {
-                games = fallbackGames;
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
+            homeScreen.classList.toggle('dimmed');
+            
+            if(drawer.classList.contains('open')) {
+                document.getElementById('app-search').focus();
+            } else {
+                document.getElementById('app-search').value = '';
+                filterApps();
             }
+        }
 
-            games.forEach(game => {
+        // Renderizado de apps
+        function renderApps(apps, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            apps.forEach(game => {
                 const appItem = document.createElement('div');
                 appItem.className = 'app-item';
-                
-                // Redirigir a game.html (el puente/lanzador) al hacer clic
-                appItem.onclick = () => {
-                    window.location.href = `game.html?id=${game.id}`;
-                };
-
+                appItem.onclick = () => window.location.href = `game.html?id=${game.id}`;
                 appItem.innerHTML = `
                     <div class="app-icon">
                         <span class="material-symbols-outlined">${game.icon}</span>
                     </div>
                     <span class="app-name">${game.name}</span>
                 `;
-                
-                grid.appendChild(appItem);
+                container.appendChild(appItem);
             });
+        }
+
+        // Búsqueda en el cajón
+        function filterApps() {
+            const query = document.getElementById('app-search').value.toLowerCase();
+            const filtered = allApps.filter(app => app.name.toLowerCase().includes(query));
+            renderApps(filtered, 'app-grid');
+        }
+
+        // Carga de datos
+        async function loadApps() {
+            try {
+                const res = await fetch('games.json');
+                if (!res.ok) throw new Error();
+                allApps = await res.json();
+            } catch (e) {
+                // Fallback básico si falla el fetch local
+                allApps = [
+                    { "id": "chrome", "name": "Chrome", "url": "./Chrome/index.html", "icon": "language" },
+                    { "id": "supreme-duelist-stickman", "name": "Supreme Duelist", "url": "./Supreme%20Duelist/index.html", "icon": "sports_kabaddi" }
+                ];
+            }
+
+            renderApps(allApps, 'app-grid');
+            
+            // Renderizar un par de apps en el dock (ej. las primeras 4)
+            renderApps(allApps.slice(0, 4), 'dock-apps');
         }
 
         window.onload = loadApps;
