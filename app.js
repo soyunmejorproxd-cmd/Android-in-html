@@ -1,132 +1,106 @@
-const state = {
-  games: [],
-  filter: 'Todo',
-  query: '',
-  ascending: true
-};
+// Referencias globales
+let allApps = [];
+let drawer, homeScreen, searchInput;
 
-const grid = document.querySelector('#grid');
-const empty = document.querySelector('#empty');
-const search = document.querySelector('#search');
-const root = document.documentElement;
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
-  })[char]);
+// Actualización de reloj y fecha
+function updateTime() {
+    const now = new Date();
+    const clockEl = document.getElementById('clock');
+    const dateEl = document.getElementById('date-widget');
+    
+    if (clockEl) {
+        clockEl.innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    if (dateEl) {
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        let dateStr = now.toLocaleDateString('es-ES', options);
+        dateEl.innerText = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    }
 }
 
-function icon(name) {
-  return `<md-icon>${escapeHTML(name)}</md-icon>`;
+// Lógica del Cajón de Aplicaciones
+function toggleDrawer() {
+    if (!drawer || !homeScreen) return;
+    
+    drawer.classList.toggle('open');
+    homeScreen.classList.toggle('dimmed');
+    
+    if(drawer.classList.contains('open')) {
+        if (searchInput) searchInput.focus();
+    } else {
+        if (searchInput) {
+            searchInput.value = '';
+            filterApps();
+        }
+    }
 }
 
-function render() {
-  let list = state.games.filter(game => {
-    const categoryOK = state.filter === 'Todo' || game.category === state.filter;
-    const searchOK = game.name.toLowerCase().includes(state.query.toLowerCase());
-    return categoryOK && searchOK;
-  });
-
-  list.sort((a, b) => state.ascending
-    ? a.name.localeCompare(b.name, 'es', {sensitivity: 'base'})
-    : b.name.localeCompare(a.name, 'es', {sensitivity: 'base'}));
-
-  grid.innerHTML = list.map(game => `
-    <article class="experience-card">
-      <div class="experience-card__top">
-        <div class="experience-card__icon" aria-hidden="true">${icon(game.icon)}</div>
-        <span class="category-pill">${escapeHTML(game.category)}</span>
-      </div>
-      <div class="experience-card__body">
-        <h3>${escapeHTML(game.name)}</h3>
-        <p>${escapeHTML(game.description)}</p>
-      </div>
-      <div class="experience-card__actions">
-        <md-filled-button data-game="${escapeHTML(game.id)}">
-          <md-icon slot="icon">play_arrow</md-icon>
-          Abrir
-        </md-filled-button>
-      </div>
-    </article>
-  `).join('');
-
-  grid.hidden = list.length === 0;
-  empty.hidden = list.length !== 0;
-  document.querySelector('#count').textContent = state.games.length;
-  document.querySelector('#resultText').textContent = `${list.length} ${list.length === 1 ? 'disponible' : 'disponibles'}`;
-  document.querySelector('#libraryTitle').textContent = state.filter === 'Todo' ? 'Todas las experiencias' : state.filter;
-
-  document.querySelectorAll('[data-game]').forEach(button => {
-    button.addEventListener('click', () => {
-      window.location.href = `game.html?game=${encodeURIComponent(button.dataset.game)}`;
+// Renderizado dinámico de apps
+function renderApps(apps, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    apps.forEach(game => {
+        const appItem = document.createElement('div');
+        appItem.className = 'app-item';
+        
+        // Redirige al puente (game.html) que carga el iframe
+        appItem.onclick = () => window.location.href = `game.html?id=${game.id}`;
+        
+        appItem.innerHTML = `
+            <div class="app-icon">
+                <span class="material-symbols-outlined">${game.icon}</span>
+            </div>
+            <span class="app-name">${game.name}</span>
+        `;
+        container.appendChild(appItem);
     });
-  });
 }
 
-function setFilter(filter) {
-  state.filter = filter;
-  document.querySelector('#allChip').selected = filter === 'Todo';
-  document.querySelector('#gamesChip').selected = filter === 'Juegos';
-  document.querySelector('#appsChip').selected = filter === 'Apps';
-  render();
+// Búsqueda en el cajón
+function filterApps() {
+    if (!searchInput) return;
+    
+    const query = searchInput.value.toLowerCase();
+    const filtered = allApps.filter(app => app.name.toLowerCase().includes(query));
+    renderApps(filtered, 'app-grid');
 }
 
-document.querySelector('#allChip').addEventListener('click', () => setFilter('Todo'));
-document.querySelector('#gamesChip').addEventListener('click', () => setFilter('Juegos'));
-document.querySelector('#appsChip').addEventListener('click', () => setFilter('Apps'));
-search.addEventListener('input', () => {
-  state.query = search.value;
-  render();
-});
+// Petición de datos a games.json
+async function loadApps() {
+    try {
+        const res = await fetch('games.json');
+        if (!res.ok) throw new Error('No se pudo cargar games.json');
+        allApps = await res.json();
+    } catch (e) {
+        console.warn('Usando datos de respaldo debido a un error:', e);
+        allApps = [
+            { "id": "chrome", "name": "Chrome", "url": "./Chrome/index.html", "icon": "language" },
+            { "id": "supreme-duelist-stickman", "name": "Supreme Duelist", "url": "./Supreme%20Duelist%20Stickman/v/assets/index.html", "icon": "sports_kabaddi" },
+            { "id": "worlds-of-wonders", "name": "Worlds of wonders", "url": "./Worlds%20of%20wonders/v/assets/index.html", "icon": "public" },
+            { "id": "block-blast", "name": "Block Blast", "url": "https://pinkdev.d13qic2f6zga3.amplifyapp.com/games/clblockblast.html", "icon": "grid_view" }
+        ];
+    }
 
-document.querySelector('#sortBtn').addEventListener('click', () => {
-  state.ascending = !state.ascending;
-  render();
-});
-
-document.querySelector('#resetBtn').addEventListener('click', () => {
-  search.value = '';
-  state.query = '';
-  setFilter('Todo');
-});
-
-document.querySelector('#aboutBtn').addEventListener('click', () => {
-  document.querySelector('#aboutDialog').show();
-});
-document.querySelector('#closeAbout').addEventListener('click', () => {
-  document.querySelector('#aboutDialog').close();
-});
-
-function setTheme(dark) {
-  root.classList.toggle('dark', dark);
-  localStorage.setItem('aih-theme', dark ? 'dark' : 'light');
-  document.querySelector('#themeIcon').textContent = dark ? 'light_mode' : 'dark_mode';
+    // Renderizar todas las apps en el cajón principal
+    renderApps(allApps, 'app-grid');
+    
+    // Renderizar las primeras 4 apps en el dock (favoritos)
+    renderApps(allApps.slice(0, 4), 'dock-apps');
 }
 
-setTheme(localStorage.getItem('aih-theme') === 'dark');
-
-const appBar = document.querySelector('#appBar');
-const syncAppBar = () => appBar.classList.toggle('is-scrolled', window.scrollY > 4);
-window.addEventListener('scroll', syncAppBar, {passive: true});
-syncAppBar();
-
-document.querySelector('#themeBtn').addEventListener('click', () => {
-  setTheme(!root.classList.contains('dark'));
+// Inicialización cuando el documento está listo
+document.addEventListener('DOMContentLoaded', () => {
+    // Capturar elementos del DOM
+    drawer = document.getElementById('app-drawer');
+    homeScreen = document.getElementById('home-screen');
+    searchInput = document.getElementById('app-search');
+    
+    // Iniciar reloj y cargar datos
+    updateTime();
+    setInterval(updateTime, 1000);
+    loadApps();
 });
-
-fetch('games.json', {cache: 'no-store'})
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
-  })
-  .then(games => {
-    state.games = Array.isArray(games) ? games : [];
-    render();
-  })
-  .catch(error => {
-    console.error('Android In Html:', error);
-    state.games = [];
-    document.querySelector('#resultText').textContent = 'No se pudo cargar el catálogo';
-    grid.hidden = true;
-    empty.hidden = false;
-  });
