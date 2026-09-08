@@ -40,6 +40,14 @@
     "description": "Aplicación web de Chrome incluida en Android In Html."
   },
   {
+    "id": "friday-night-funkin",
+    "name": "Friday Night Funkin'",
+    "category": "Juegos",
+    "url": "https://uploads.ungrounded.net/alternate/1528000/1528775_alternate_113347_r143.zip/",
+    "icon": "music_note",
+    "description": "Sigue el ritmo y gana las batallas musicales."
+  },
+  {
     "id": "geometry-dash",
     "name": "Geometry Dash",
     "category": "Juegos",
