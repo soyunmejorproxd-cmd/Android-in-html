@@ -126,6 +126,8 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
 }
 
 .search-widget .logo {
@@ -225,7 +227,7 @@ body {
 /* Cuadrícula adaptable de Apps */
 .app-grid {
     display: grid;
-    /* Se adapta automáticamente al ancho de la pantalla (Tablet/Móvil) */
+    /* Se adapta automáticamente al ancho de la pantalla */
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     gap: 28px 16px;
     width: 100%;
@@ -258,13 +260,15 @@ body {
     width: 64px;
     height: 64px;
     background-color: var(--sys-color-icon-bg);
-    border-radius: 50%; /* Circular por defecto como Pixel */
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--sys-color-primary);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     border: 1px solid rgba(255,255,255,0.08);
+    position: relative; /* Necesario para el efecto ripple */
+    overflow: hidden;
 }
 
 .app-icon span {
@@ -302,4 +306,21 @@ body {
     height: 4px;
     background-color: rgba(255,255,255,0.8);
     border-radius: 2px;
+}
+
+/* --- Efecto Ripple Material Design --- */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4); 
+    transform: scale(0);
+    animation: ripple-animation 0.5s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
