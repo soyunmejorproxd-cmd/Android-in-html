@@ -35,7 +35,7 @@
     "id": "chrome",
     "name": "Chrome",
     "category": "Apps",
-    "entry": "Chrome/index.html",
+    "url": "./Chrome/index.html",
     "icon": "language",
     "description": "Aplicación web de Chrome incluida en Android In Html."
   },
@@ -99,7 +99,7 @@
     "id": "supreme-duelist-stickman",
     "name": "Supreme Duelist Stickman",
     "category": "Juegos",
-    "entry": "Supreme Duelist Stickman/v/assets/index.html",
+    "url": "./Supreme%20Duelist%20Stickman/v/assets/index.html",
     "icon": "sports_kabaddi",
     "description": "Combate con tu stickman en duelos llenos de acción."
   },
@@ -107,7 +107,7 @@
     "id": "worlds-of-wonders",
     "name": "Worlds of wonders",
     "category": "Juegos",
-    "entry": "Worlds of wonders/v/assets/index.html",
+    "url": "./Worlds%20of%20wonders/v/assets/index.html",
     "icon": "public",
     "description": "Explora un mundo de aventuras y desafíos."
   }
